@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using RtMidi.Core;
@@ -15,6 +16,9 @@ namespace Piano2GW
 		private static Instrument _instrument;
 
 		private static int _currentOctave;
+
+		private static Stopwatch _timeSinceLastOctaveSwitch = new Stopwatch();
+		private const int MIN_TIME_BETWEEN_OCTAVE_SWITCH = 90;
 
 		private static void Main()
 		{
@@ -32,6 +36,8 @@ namespace Piano2GW
 					PressNote((int)msg.Key);
 			};
 			_device.Open();
+			
+			_timeSinceLastOctaveSwitch.Start();
 			
 			Console.WriteLine("Running... Press Q to quit.");
 
@@ -63,44 +69,25 @@ namespace Piano2GW
 		private static int AdjustInGameOctave(Note note)
 		{
 			int requestedOctave = note.Octave;
-			int key;
-			
-			switch (note.Name)
+			int key = note.Name switch
 			{
-				case NoteName.C:
-					key = 1;
-					break;
-				case NoteName.D:
-					key = 2;
-					break;
-				case NoteName.E:
-					key = 3;
-					break;
-				case NoteName.F:
-					key = 4;
-					break;
-				case NoteName.G:
-					key = 5;
-					break;
-				case NoteName.A:
-					key = 6;
-					break;
-				case NoteName.B:
-					key = 7;
-					break;
-				default:
-					throw new Exception();
-			}
+				NoteName.C => 1,
+				NoteName.D => 2,
+				NoteName.E => 3,
+				NoteName.F => 4,
+				NoteName.G => 5,
+				NoteName.A => 6,
+				NoteName.B => 7,
+				_ => throw new Exception()
+			};
 
-			bool firstOctaveChange = true;
 			while (_currentOctave != requestedOctave)
 			{
-				if (!firstOctaveChange)
-					Thread.Sleep(90);
+				if (_timeSinceLastOctaveSwitch.ElapsedMilliseconds < MIN_TIME_BETWEEN_OCTAVE_SWITCH)
+					Thread.Sleep(Math.Max(MIN_TIME_BETWEEN_OCTAVE_SWITCH - (int)_timeSinceLastOctaveSwitch.ElapsedMilliseconds, 0));
 				
 				if (note.Name == NoteName.C && _currentOctave == requestedOctave - 1)
 				{
-					Thread.Sleep(10);
 					return 8;
 				}
 
@@ -115,9 +102,7 @@ namespace Piano2GW
 					_currentOctave--;
 				}
 
-				firstOctaveChange = false;
-				
-				Thread.Sleep(10);
+				_timeSinceLastOctaveSwitch.Restart();
 			}
 
 			return key;
