@@ -14,7 +14,7 @@ However, I don't control ANET's banwaves and the "zero risk" cannot be guarantee
 This script uses the default layout (1234567890).
 
 # Usage
-1. Connect your physical instrument to the PC.
+1. Connect your physical instrument to your PC.
 2. Run the program.
 
 # Build
