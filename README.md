@@ -1,4 +1,7 @@
-More instruments will be added later (eventually).
+# How does it works?
+Piano2GW simply maps the instrument notes to keyboard key.
+
+The octave switching mechanics is handled automatically (but is still limited to what the crappy instrument system can currently offers).
 
 # About GW2's TOS
 As using AutoHotKey to automatically play songs is permitted and as this tool does pretty much the same thing, there shouldn't be any problem using it.
