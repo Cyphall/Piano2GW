@@ -19,7 +19,7 @@ namespace Piano2GW
 		{
 			{"Musical Bass Guitar",    new Instrument(1, 2, 1)},
 			{"Musical Harp",           new Instrument(3, 5, 4)},
-			{"Musical Lute",           new Instrument(3, 5, 4)},
+			{"Musical Lute",           new Instrument(3, 6, 6)},
 			{"Magnanimous Choir Bell", new Instrument(4, 5, 4)}
 		};
 	}
