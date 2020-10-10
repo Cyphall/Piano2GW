@@ -13,6 +13,11 @@ However, I don't control ANET's banwaves and the "zero risk" cannot be guarantee
 # Keybinds
 This script uses the default layout (1234567890).
 
+# Why is there 2 exe?
+The small exe is framework-dependant and will not work if you do not have the required Microsoft libraries already installed.
+
+The large exe is self-contained (SC) and bundles all required libraries. This one will work even if you do not have these libraries.
+
 # Usage
 1. Connect your physical instrument to your PC.
 2. Run the program.
@@ -22,4 +27,4 @@ This script uses the default layout (1234567890).
 2. Run the file `publish.bat`
 
 # Known issues
-Inter-octave chords can be inconsistent if they are played too quickly.
+Switching octaves can add some latency to the next note to ensure consistency.
