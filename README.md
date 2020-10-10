@@ -14,6 +14,8 @@ However, I don't control ANET's banwaves and the "zero risk" cannot be guarantee
 This script uses the default layout (1234567890).
 
 # Why is there 2 exe?
+Starting with version 1.2.0, Piano2GW now ships in both framework-dependent and self-contained modes.
+
 The small exe is framework-dependant and will not work if you do not have the required Microsoft libraries already installed.
 
 The large exe is self-contained (SC) and bundles all required libraries. This one will work even if you do not have these libraries.
