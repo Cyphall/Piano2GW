@@ -1,0 +1,80 @@
+﻿<Window x:Class="Piano2GW.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Piano2GW"
+        mc:Ignorable="d"
+        Title="Piano2GW" Height="300" Width="400"
+        ResizeMode="CanMinimize"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Closing="Window_Closing">
+	<Window.Resources>
+		<Style TargetType="Button">
+			<Setter Property="Background" Value="#E3E3E3"/>
+			<Setter Property="Foreground" Value="#000000"/>
+			<Setter Property="Width" Value="75"/>
+			<Setter Property="Height" Value="35"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Border BorderThickness="1"
+						        BorderBrush="#AAAAAA"
+						        Background="{TemplateBinding Background}"
+						        CornerRadius="4">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="#D3D3D3" />
+					<Setter Property="Cursor" Value="Hand" />
+				</Trigger>
+				<Trigger Property="IsPressed" Value="True">
+					<Setter Property="Background" Value="#C3C3C3" />
+				</Trigger>
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Background" Value="#F3F3F3" />
+					<Setter Property="Foreground" Value="#AAAAAA"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+	
+	<Grid>
+	    <Grid.RowDefinitions>
+		    <RowDefinition Height="*"/>
+		    <RowDefinition Height="*"/>
+		    <RowDefinition Height="*"/>
+		    <RowDefinition Height="*"/>
+	    </Grid.RowDefinitions>
+	    
+		<StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+			<TextBlock Text="Choose MIDI device:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+		    <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="DevicesComboBox" MinWidth="200" SelectionChanged="OnDeviceChanged">
+			    <ComboBox.ItemTemplate>
+				    <DataTemplate>
+					    <TextBlock Text="{Binding Name}" />
+				    </DataTemplate>
+			    </ComboBox.ItemTemplate>
+		    </ComboBox>
+		</StackPanel>
+	    
+		<StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<TextBlock Text="Choose Guild Wars 2 instrument:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+			<ComboBox HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InstrumentComboBox" MinWidth="200" SelectionChanged="OnInstrumentChanged">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name}" />
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</StackPanel>
+		
+		<TextBlock x:Name="StateText" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		
+		<Button x:Name="ToggleRunning" Grid.Column="0" Padding="5" Grid.Row="3" Click="ToggleRunning_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" />
+	</Grid>
+</Window>

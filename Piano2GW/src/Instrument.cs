@@ -4,23 +4,26 @@ namespace Piano2GW
 {
 	public class Instrument
 	{
+		public string Name { get; }
+		
 		public int FirstOctave { get; }
 		public int LastOctave { get; }
 		public int DefaultOctave { get; }
 		
-		private Instrument(int firstOctave, int lastOctave, int defaultOctave)
+		private Instrument(string name, int firstOctave, int lastOctave, int defaultOctave)
 		{
+			Name = name;
 			FirstOctave = firstOctave;
 			LastOctave = lastOctave;
 			DefaultOctave = defaultOctave;
 		}
 		
-		public static Dictionary<string, Instrument> Instruments { get; } = new Dictionary<string, Instrument>
+		public static List<Instrument> Instruments { get; } = new List<Instrument>
 		{
-			{"Musical Bass Guitar",    new Instrument(1, 2, 1)},
-			{"Musical Harp",           new Instrument(3, 5, 4)},
-			{"Musical Lute",           new Instrument(3, 6, 6)},
-			{"Magnanimous Choir Bell", new Instrument(4, 5, 4)}
+			new Instrument("Musical Bass Guitar",    1, 2, 1),
+			new Instrument("Musical Harp",           3, 5, 4),
+			new Instrument("Musical Lute",           3, 6, 6),
+			new Instrument("Magnanimous Choir Bell", 4, 5, 4)
 		};
 	}
 }

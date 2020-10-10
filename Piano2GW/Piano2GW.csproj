@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
+		<OutputType>WinExe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<Version>1.1.0</Version>
+		<UseWPF>true</UseWPF>
+		<Version>1.2.0</Version>
 		<AssemblyName>$(AssemblyName)-$(Version)</AssemblyName>
 	</PropertyGroup>
 
